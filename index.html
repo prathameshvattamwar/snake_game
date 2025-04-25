@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Snake Game - Enhanced</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-wrapper">
+        <div class="game-details">
+            <span class="score">Score: 0</span>
+            <span class="difficulty">Difficulty: Medium</span>
+            <span class="high-score">High Score: 0</span>
+        </div>
+        <div class="play-board"></div>
+        <div class="controls">
+            <i data-key="ArrowLeft" class="fa-solid fa-arrow-left-long"></i>
+            <i data-key="ArrowUp" class="fa-solid fa-arrow-up-long"></i>
+            <i data-key="ArrowRight" class="fa-solid fa-arrow-right-long"></i>
+            <i data-key="ArrowDown" class="fa-solid fa-arrow-down-long"></i>
+        </div>
+
+        <div class="game-message-overlay" id="start-game-overlay">
+            <div class="game-message-box">
+                <h2>Snake Game</h2>
+                <p>Use Arrow Keys or "W A S D" to play.<br>Press P to Pause, R to Resume.</p>
+                <button class="start-button">Start Game</button>
+            </div>
+        </div>
+
+         <div class="game-message-overlay" id="game-over-overlay" style="display: none;">
+            <div class="game-message-box">
+                <h2>Game Over!</h2>
+                <p>Your Score: <span class="final-score">0</span></p>
+                <button class="restart-button">Play Again</button>
+            </div>
+        </div>
+
+         <div class="game-message-overlay" id="pause-overlay" style="display: none;">
+             <div class="game-message-box pause-box">
+                 <h2>Paused</h2>
+                 <p>Press R to Resume</p>
+             </div>
+         </div>
+
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

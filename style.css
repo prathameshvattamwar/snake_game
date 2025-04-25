@@ -1,0 +1,282 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --primary-color-start: #667eea;
+    --primary-color-end: #764ba2;
+    --background-gradient: linear-gradient(135deg, var(--primary-color-start) 0%, var(--primary-color-end) 100%);
+    --board-bg: #1a1a2e;
+    --text-light: #e0e0e0;
+    --text-highlight: #ffffff;
+    --score-color: #fbc531;
+    --food-color: #e84393;
+    --snake-head-color: #48dbfb;
+    --snake-body-color: #00cec9;
+    --button-bg: #2c2c54;
+    --button-hover-bg: #40407a;
+    --shadow-color: rgba(0, 0, 0, 0.2);
+    --border-color: #474787;
+    --overlay-bg: rgba(0, 0, 0, 0.7);
+    --popup-bg: #23233b; /* Slightly lighter popup background */
+    --popup-border: #474787;
+    --action-button-bg: linear-gradient(135deg, var(--primary-color-start) 0%, var(--primary-color-end) 100%);
+    --action-button-hover-opacity: 0.9;
+    --action-button-shadow: rgba(118, 75, 162, 0.4);
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: var(--background-gradient);
+    color: var(--text-light);
+    padding: 10px;
+     overflow: hidden;
+}
+
+.game-wrapper {
+    width: 100%;
+    max-width: 65vmin;
+    min-width: 300px;
+    background: var(--board-bg);
+    border-radius: 10px;
+    box-shadow: 0 15px 40px var(--shadow-color);
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+
+.game-details {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 25px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--text-light);
+}
+
+.game-details span {
+    min-width: 80px;
+    text-align: center;
+}
+
+.score {
+    color: var(--score-color);
+    font-weight: 600;
+}
+
+.high-score {
+    color: var(--text-highlight);
+    font-weight: 600;
+}
+
+.play-board {
+    width: 100%;
+    height: 65vmin;
+    max-height: 65vmin;
+    background: var(--board-bg);
+    display: grid;
+    grid-template: repeat(30, 1fr) / repeat(30, 1fr);
+    position: relative;
+     overflow: hidden;
+}
+
+.play-board .food {
+    background: var(--food-color);
+    border-radius: 50%;
+    box-shadow: 0 0 10px var(--food-color);
+    animation: pulseFood 1.5s infinite alternate;
+}
+
+.play-board .head {
+    background: var(--snake-head-color);
+    border-radius: 4px;
+     z-index: 2;
+     position: relative;
+}
+
+.play-board .body {
+    background: var(--snake-body-color);
+    border: 1px solid var(--board-bg);
+    border-radius: 2px;
+     z-index: 1;
+     position: relative;
+}
+
+@keyframes pulseFood {
+    from { transform: scale(0.9); opacity: 0.8; }
+    to { transform: scale(1.1); opacity: 1; }
+}
+
+.controls {
+    display: none;
+    justify-content: space-between;
+    padding: 15px 25px;
+    border-top: 1px solid var(--border-color);
+}
+
+.controls i {
+    font-size: 1.3rem;
+    color: var(--text-light);
+    background: var(--button-bg);
+    padding: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    width: 60px;
+    text-align: center;
+    transition: background-color 0.3s ease;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.controls i:hover {
+    background: var(--button-hover-bg);
+}
+
+.controls i:active {
+     transform: scale(0.95);
+}
+
+
+.game-message-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: var(--overlay-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    backdrop-filter: blur(5px);
+}
+
+.game-message-box {
+    background-color: var(--popup-bg);
+    padding: 30px 40px;
+    border-radius: 10px;
+    text-align: center;
+    border: 1px solid var(--popup-border);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.3);
+}
+
+.game-message-box h2 {
+    color: var(--text-highlight);
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+}
+
+#game-over-overlay h2 {
+     color: var(--food-color);
+}
+
+.game-message-box p {
+    font-size: 1rem;
+    line-height: 1.5;
+    margin-bottom: 25px;
+    color: var(--text-light);
+}
+
+#pause-overlay p {
+    margin-bottom: 0;
+     font-size: 1.1rem;
+}
+
+.game-message-box .final-score {
+    font-weight: 700;
+    color: var(--score-color);
+}
+
+.start-button,
+.restart-button {
+    padding: 10px 25px;
+    font-size: 1rem;
+    font-weight: 500;
+    color: var(--text-light);
+    background: var(--action-button-bg);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    outline: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.start-button:hover,
+.restart-button:hover {
+    opacity: var(--action-button-hover-opacity);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px var(--action-button-shadow);
+}
+
+.start-button:active,
+.restart-button:active {
+    transform: translateY(0px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+
+@media (max-width: 800px) {
+    .game-wrapper {
+        max-width: 90vmin;
+    }
+     .play-board {
+         height: 90vmin;
+         max-height: 90vmin;
+     }
+    .controls {
+        display: flex;
+    }
+    .game-details {
+        font-size: 0.8rem;
+        padding: 10px 20px;
+    }
+     .controls i {
+        font-size: 1.1rem;
+        padding: 12px;
+         width: 50px;
+    }
+}
+
+@media (max-width: 500px) {
+     .game-wrapper {
+        max-width: 95vmin;
+         border-radius: 8px;
+    }
+     .play-board {
+         height: 95vmin;
+         max-height: 95vmin;
+     }
+     .game-details span {
+        min-width: 60px;
+        font-size: 0.75rem;
+     }
+     .controls i {
+        padding: 10px;
+        font-size: 1rem;
+     }
+     .game-message-box {
+        padding: 20px 30px;
+        max-width: 90%;
+     }
+     .game-message-box h2 {
+        font-size: 1.5rem;
+     }
+     .game-message-box p {
+        font-size: 0.9rem;
+        margin-bottom: 20px;
+     }
+     .start-button,
+     .restart-button {
+        font-size: 0.9rem;
+        padding: 8px 20px;
+     }
+}
